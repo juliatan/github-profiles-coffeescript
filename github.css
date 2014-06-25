@@ -45,3 +45,9 @@ input {
 .profile img {
   width: 100%;
 }
+
+#delete {
+  float: right;
+  padding: 0;
+  margin: 0;
+}

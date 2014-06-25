@@ -6,11 +6,12 @@
   <body>
     <form id='add_profile'>
       <input id='username' placeholder='Enter a Github username'>
-      <button type='submit'>Load profile</button>
+      <button type='submit' id="submit">Load profile</button>
     </form>
+    
+    <img class="spinner" src="spinner.gif" />
 
     <div class='profile-container'>
-
     </div>
 
     <template id='profile-template'>
@@ -20,6 +21,7 @@
         </div>
 
         <div class="right">
+        <p id="delete">X</p>
           <h3>
             <a href="{{ html_url }}">
               {{ login }}
@@ -35,11 +37,30 @@
     <script src='https://code.jquery.com/jquery-2.0.3.min.js'></script>
     <script src='mustache.js'></script>
     <script>
-      $(document).ready(function(){
-        $.get('https://api.github.com/users/josephwolf', function(user){
+
+      function getProfile(username) {
+        $('.spinner').show();
+
+        $.get('https://api.github.com/users/'+ username, function(user){
           var newProfile = Mustache.render($('#profile-template').html(), user);
-          $('.profile-container').append(newProfile);
+          $('.profile-container').prepend(newProfile);
+        }).error(function(){
+          alert("There is no user called " + username);
+        }).always(function(){
+          $('#username').val('');
+          $('.spinner').hide();
         })
+      };
+
+      $(document).ready(function(){
+        ['alexmakers', 'juliatan'].forEach(function(username){
+          getProfile(username);
+        });
+
+        $('#add_profile').on('submit', function(juliarr) {
+          juliarr.preventDefault();
+          getProfile($('#username').val())
+        });
       });
     </script>
   </body>
