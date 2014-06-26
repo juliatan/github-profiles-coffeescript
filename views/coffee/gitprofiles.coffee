@@ -16,9 +16,15 @@ getProfile = (username)->
     cleanup()
   )
 
+deleteProfile = ->
+  $('.profile-container').on('click', '.delete', ->
+    $(this).closest('.profile').remove()
+  )
+
 $(document).ready(->
   $('#add_profile').on('submit', (event)->
     event.preventDefault()
     getProfile($('#username').val())
   )
+  deleteProfile()
 )
