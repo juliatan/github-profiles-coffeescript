@@ -2,7 +2,7 @@ GitHub Profiles Using CoffeeScript
 ==================================
 
 Practice exercise during Week 7 of Makers Academy bootcamp. The idea was to
-using GitHub's API to display user selected Github profiles.
+use GitHub's API to display user selected Github profiles.
 
 Technologies Used
 -----------------
